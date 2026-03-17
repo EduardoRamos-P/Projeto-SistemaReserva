@@ -4,8 +4,8 @@ USE sistema_reserva;
 CREATE TABLE users (
     id_user INT AUTO_INCREMENT NOT NULL,
     user_name VARCHAR(50) NOT NULL,
-    user_email VARCHAR(100) NOT NULL,
-    user_pass VARCHAR(100) NOT NULL,
+    user_email VARCHAR(100) NOT NULL UNIQUE,
+    user_pass VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     user_type BOOL NOT NULL,
     CONSTRAINT pk_user PRIMARY KEY (id_user)
