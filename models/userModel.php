@@ -21,6 +21,15 @@
             return (bool) $stmt->fetch();
         }
 
+        public function verifyLogin($user_email){
+            $sql = "SELECT user_name,user_email,user_pass FROM users
+            WHERE user_email = :user_email";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(":user_email",$user_email);
+            $stmt->execute();
+            return $stmt->fetch();
+        }
+
     }
 
 
