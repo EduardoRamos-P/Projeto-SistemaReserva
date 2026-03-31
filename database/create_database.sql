@@ -16,10 +16,7 @@ CREATE TABLE resources (
     res_name VARCHAR(50) NOT NULL,
     res_description VARCHAR(300) NOT NULL,
     capacity SMALLINT UNSIGNED NOT NULL,
-    start_date_res DATE,
-    end_date_res DATE,
-    start_time_res TIME,
-    end_time_res TIME,
+    validity DATETIME NOT NULL,
     CONSTRAINT pk_resources PRIMARY KEY (id_res)
 );
 
