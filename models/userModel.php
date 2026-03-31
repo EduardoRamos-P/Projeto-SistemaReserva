@@ -4,13 +4,14 @@
         public function __construct($pdo){
             $this->pdo = $pdo;
         }
-        public function registerUser($name,$email,$password){
-            $sql = "INSERT INTO users(user_name,user_email,user_pass)
-            VALUES (:user_name,:user_email,:user_pass)";
+        public function registerUser($name,$email,$password,$type){
+            $sql = "INSERT INTO users(user_name,user_email,user_pass,user_type)
+            VALUES (:user_name,:user_email,:user_pass,:user_type)";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(":user_name",$name);
             $stmt->bindParam(":user_email",$email);
             $stmt->bindParam(":user_pass",$password);
+            $stmt->bindParam(":user_type",$type);
             $stmt->execute();
         }
         public function verifyEmail($user_email){
@@ -22,8 +23,8 @@
         }
 
         public function verifyLogin($user_email){
-            $sql = "SELECT user_name,user_email,user_pass FROM users
-            WHERE user_email = :user_email";
+            $sql = "SELECT id_user,user_name,user_pass,user_type FROM users
+            WHERE user_email = :user_email LIMIT 1";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(":user_email",$user_email);
             $stmt->execute();

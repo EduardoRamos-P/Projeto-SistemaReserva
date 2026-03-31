@@ -13,28 +13,29 @@
             $userModel = new userModel($pdo);
             $usuario = $userModel->verifyLogin($email);
             if(!$usuario){
-                throw new Exception("Usuário não cadastrado");
+                throw new Exception("email ou senha incorretos");
             }
 
             if(!password_verify($pass,$usuario["user_pass"])){
-                throw new Exception("Senha incorreta");
+                throw new Exception("email ou senha incorretos");
             }
 
             session_start();
             $_SESSION["user_name"] = $usuario["user_name"];
-            $_SESSION["user_email"] = $usuario["user_email"];
-            $_SESSION["user_pass"] = $usuario["user_pass"];
+            $_SESSION["id_user"] = $usuario["id_user"];
+            $_SESSION["user_type"] = $usuario["user_type"];
 
             echo json_encode([
                 "status" => "success",
-                "message" => "Login realizado com sucesso!"
+                "message" => "Login realizado com sucesso!",
+                "user_type" => $usuario["user_type"]
             ]);
 
         }
         catch (Exception $e){
             echo json_encode([
-                "status" => "erro",
-                "message" => $e->getMessage()
+                "status" => "error",
+                "message" => $e->getMessage(),
             ]);
         }
     }

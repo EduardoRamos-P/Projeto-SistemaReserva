@@ -10,8 +10,7 @@
 </head>
 <body>
     <h1>Seja bem vindo <?php echo $_SESSION["user_name"];?></h1>
-    <h3>Email:<?php echo $_SESSION["user_email"]?></h3>
-    <h3>Senha:<?php echo $_SESSION["user_pass"]?></h3>
+    <h3>Email:<?php echo $_SESSION["id_user"];?></h3>
     <button ></button>
 </body>
 </html>
